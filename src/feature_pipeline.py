@@ -43,8 +43,9 @@ logger.info(
 
 # Step 5: Connect to the Hopsworks project
 logger.info("Connecting to Hopsworks project...")
-print(config.HOPSWORKS_API_KEY)
-print(config.HOPSWORKS_PROJECT_NAME)
+print('This is a test')
+print('The API KEY is',config.HOPSWORKS_API_KEY)
+print('The proj name is ',config.HOPSWORKS_PROJECT_NAME)
 project = hopsworks.login(
     project=config.HOPSWORKS_PROJECT_NAME, api_key_value=config.HOPSWORKS_API_KEY
 )
