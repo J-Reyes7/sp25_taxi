@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from hsfs.feature_store import FeatureStore
 
+
 import src.config as config
 from src.data_utils import transform_ts_data_info_features
 
@@ -47,6 +48,7 @@ def load_batch_of_features_from_store(
     ts_data = feature_view.get_batch_data(
         start_time=(fetch_data_from - timedelta(days=1)),
         end_time=(fetch_data_to + timedelta(days=1)),
+        arrow_flight_config={"timeout": 300}
     )
     ts_data = ts_data[ts_data.pickup_hour.between(fetch_data_from, fetch_data_to)]
 
@@ -75,7 +77,8 @@ def load_model_from_registry(version=None):
 
     models = model_registry.get_models(name=config.MODEL_NAME)
     model = max(models, key=lambda model: model.version)
-    model_dir = model.download()
+    model_dir = model.download() 
+    #print(model_dir)
     model = joblib.load(Path(model_dir) / "lgb_model.pkl")
 
     return model

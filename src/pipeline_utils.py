@@ -1,4 +1,4 @@
-import lightgbm as lgb
+from sklearn.ensemble import GradientBoostingRegressor
 import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import make_pipeline
@@ -67,6 +67,6 @@ def get_pipeline(**hyper_params):
     pipeline = make_pipeline(
         add_feature_average_rides_last_4_weeks,
         add_temporal_features,
-        lgb.LGBMRegressor(**hyper_params),  # Pass optional parameters here
+        GradientBoostingRegressor(**hyper_params),  # Pass optional parameters here
     )
     return pipeline
